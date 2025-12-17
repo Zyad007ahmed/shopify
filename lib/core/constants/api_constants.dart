@@ -1,4 +1,6 @@
 class ApiConstants {
+  ApiConstants._();
+
   // Base URL
   static const String baseUrl = 'https://api.escuelajs.co/api/v1';
 

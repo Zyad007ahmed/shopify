@@ -7,6 +7,8 @@ import 'widgets_themedata/checkbox_themedata.dart';
 import 'widgets_themedata/theme_data.dart';
 
 class AppTheme {
+  AppTheme._();
+
   static ThemeData theme(BuildContext context) {
     return ThemeData(
       fontFamily: "Plus Jakarta",
