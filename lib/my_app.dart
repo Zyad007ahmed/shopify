@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shopify/core/router/routes.dart';
 import 'package:shopify/core/theme/app_theme.dart';
 import 'package:shopify/core/router/router.dart' as router;
 
@@ -13,6 +14,7 @@ class MyApp extends ConsumerWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.theme(context),
       onGenerateRoute: router.generateRoute,
+      initialRoute: onbordingScreenRoute,
     );
   }
 }
