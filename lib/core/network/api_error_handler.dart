@@ -1,43 +1,46 @@
 import 'package:dio/dio.dart';
+import 'package:shopify/core/error/exceptions.dart';
 
-import 'api_error_model.dart';
+import 'error_model.dart';
 
-class ApiErrorHandler {
-  static ApiErrorModel handle(dynamic error) {
+class ErrorHandler {
+  static ErrorModel handle(dynamic error) {
     if (error is DioException) {
       switch (error.type) {
         case DioExceptionType.connectionError:
-          return ApiErrorModel(message: "Connection to server failed");
+          return ErrorModel(message: "Connection to server failed");
         case DioExceptionType.cancel:
-          return ApiErrorModel(message: "Request to the server was cancelled");
+          return ErrorModel(message: "Request to the server was cancelled");
         case DioExceptionType.connectionTimeout:
-          return ApiErrorModel(message: "Connection timeout with the server");
+          return ErrorModel(message: "Connection timeout with the server");
         case DioExceptionType.unknown:
-          return ApiErrorModel(
+          return ErrorModel(
             message:
                 "Connection to the server failed due to internet connection",
           );
         case DioExceptionType.receiveTimeout:
-          return ApiErrorModel(
+          return ErrorModel(
             message: "Receive timeout in connection with the server",
           );
         case DioExceptionType.badResponse:
           return _handleError(error.response?.data);
         case DioExceptionType.sendTimeout:
-          return ApiErrorModel(
+          return ErrorModel(
             message: "Send timeout in connection with the server",
           );
         default:
-          return ApiErrorModel(message: "Something went wrong");
+          return ErrorModel(message: "Something went wrong");
       }
+    } else if (error.type is CacheException) {
+      return ErrorModel(message: (error.type as CacheException).message);
     } else {
-      return ApiErrorModel(message: "Unknown error occurred");
+      return ErrorModel(message: "Unknown error occurred");
     }
   }
 }
 
-ApiErrorModel _handleError(dynamic data) {
-  return ApiErrorModel(
+ErrorModel _handleError(dynamic data) {
+  return ErrorModel(
     message: getMessageString(data) ?? "Unknown error occurred",
     error: data['error'],
     code: data['statusCode'],
@@ -46,7 +49,7 @@ ApiErrorModel _handleError(dynamic data) {
 
 String? getMessageString(data) {
   if (data['message'] is List) {
-    return (data['message'] as List<String>).join('\n');
+    return (data['message'] as List).join('\n');
   } else {
     return data['message'];
   }

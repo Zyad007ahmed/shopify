@@ -1,0 +1,76 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shopify/core/constants/ui_constants.dart';
+import 'package:shopify/features/auth/presentation/providers/auth_providers.dart';
+
+class LogInForm extends ConsumerWidget {
+  const LogInForm({super.key, required this.formKey});
+
+  final GlobalKey<FormState> formKey;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Form(
+      key: formKey,
+      child: Column(
+        children: [
+          TextFormField(
+            validator: emaildValidator.call,
+            controller: ref
+                .read(authViewModelProvider.notifier)
+                .emailController,
+            textInputAction: TextInputAction.next,
+            keyboardType: TextInputType.emailAddress,
+            decoration: InputDecoration(
+              hintText: "Email address",
+              prefixIcon: Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: defaultPadding * 0.75,
+                ),
+                child: SvgPicture.asset(
+                  "assets/icons/Message.svg",
+                  height: 24,
+                  width: 24,
+                  colorFilter: ColorFilter.mode(
+                    Theme.of(
+                      context,
+                    ).textTheme.bodyLarge!.color!.withValues(alpha: 0.3),
+                    BlendMode.srcIn,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: defaultPadding),
+          TextFormField(
+            validator: passwordValidator.call,
+            controller: ref
+                .read(authViewModelProvider.notifier)
+                .passwordController,
+            obscureText: true,
+            decoration: InputDecoration(
+              hintText: "Password",
+              prefixIcon: Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: defaultPadding * 0.75,
+                ),
+                child: SvgPicture.asset(
+                  "assets/icons/Lock.svg",
+                  height: 24,
+                  width: 24,
+                  colorFilter: ColorFilter.mode(
+                    Theme.of(
+                      context,
+                    ).textTheme.bodyLarge!.color!.withValues(alpha: 0.3),
+                    BlendMode.srcIn,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

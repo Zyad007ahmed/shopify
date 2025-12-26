@@ -10,6 +10,7 @@ class ApiConstants {
   static const String usersEP = '/users';
   static const String authLoginEP = '/auth/login';
   static const String authProfileEP = '/auth/profile';
+  static const String isUserAvaiilableEP = '/users/is-available';
   static const String authRefreshEP = '/auth/refresh-token';
   static const String filesEP = '/files/upload';
 

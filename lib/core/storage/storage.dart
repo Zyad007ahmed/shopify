@@ -26,6 +26,11 @@ class Storage {
     return await _storage.read(key: _refreshTokenKey);
   }
 
+  Future<void> saveTokens(String accessToken, String refreshToken) async {
+    await saveAccessToken(accessToken);
+    await saveRefreshToken(refreshToken);
+  }
+
   Future<void> saveUserId(String userId) async {
     await _storage.write(key: _userIdKey, value: userId);
   }
