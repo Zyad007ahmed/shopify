@@ -4,6 +4,8 @@ const double defaultPadding = 16.0;
 const double defaultBorderRadious = 12.0;
 const Duration defaultDuration = Duration(milliseconds: 300);
 
+const grandisExtendedFont = "Grandis Extended";
+
 final passwordValidator = MultiValidator([
   RequiredValidator(errorText: 'Password is required'),
   MinLengthValidator(8, errorText: 'password must be at least 8 digits long'),

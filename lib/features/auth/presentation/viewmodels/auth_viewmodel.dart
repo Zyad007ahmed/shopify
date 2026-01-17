@@ -95,7 +95,7 @@ class AuthViewmodel extends StateNotifier<AuthState> {
 
     result.when(
       success: (user) => state = AuthState.authenticated(user),
-      failure: (failure) => const AuthState.unauthenticated(),
+      failure: (failure) => state = const AuthState.unauthenticated(),
     );
   }
 

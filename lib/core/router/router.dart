@@ -18,6 +18,8 @@ Route? generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const EntryPoint());
     case homeScreenRoute:
       return MaterialPageRoute(builder: (context) => const HomeScreen());
+    case productDetailsScreenRoute:
+      return MaterialPageRoute(builder: (context) => const OnBordingScreen());
     default:
       return null;
   }
