@@ -31,8 +31,8 @@ class ErrorHandler {
         default:
           return ErrorModel(message: "Something went wrong");
       }
-    } else if (error.type is CacheException) {
-      return ErrorModel(message: (error.type as CacheException).message);
+    } else if (error is CacheException) {
+      return ErrorModel(message: error.message);
     } else {
       return ErrorModel(message: "Unknown error occurred");
     }

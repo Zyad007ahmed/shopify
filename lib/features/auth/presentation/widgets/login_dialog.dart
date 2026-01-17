@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shopify/core/constants/app_strings.dart';
 import 'package:shopify/core/router/routes.dart';
-import 'package:shopify/core/utils/extensions.dart';
+import 'package:shopify/core/widgets/error_dialog.dart';
 import 'package:shopify/features/auth/presentation/providers/auth_providers.dart';
 import 'package:shopify/features/auth/presentation/viewmodels/auth_state.dart';
 
@@ -34,21 +34,7 @@ class LoginDialog extends ConsumerWidget {
   }
 
   Widget _errorLoginDialog(message, BuildContext context) {
-    return AlertDialog(
-      title: Text(
-        AppStrings.loginFailed,
-        style: TextStyle(color: Colors.redAccent),
-      ),
-      content: Text(message),
-      actions: [
-        TextButton(
-          onPressed: () {
-            context.pop();
-          },
-          child: Text(AppStrings.gotIt),
-        ),
-      ],
-    );
+    return ErrorDialog(title: AppStrings.loginFailed, message: message);
   }
 
   navigateToEntryPoint(BuildContext context) {

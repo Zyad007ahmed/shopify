@@ -12,6 +12,7 @@ ErrorModel _$ErrorModelFromJson(Map<String, dynamic> json) => ErrorModel(
   code: (json['statusCode'] as num?)?.toInt(),
 );
 
+// ignore: unused_element
 Map<String, dynamic> _$ErrorModelToJson(ErrorModel instance) =>
     <String, dynamic>{
       'message': instance.message,

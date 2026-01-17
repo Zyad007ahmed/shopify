@@ -51,7 +51,6 @@ class SignupDialog extends ConsumerWidget {
     );
   }
 
-  //todo
   navigateToEntryPoint(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(
       context,
@@ -70,7 +69,7 @@ class SignupDialog extends ConsumerWidget {
       actions: [
         TextButton(
           onPressed: () {
-            context.pop();
+            navigateToEntryPoint(context);
           },
           child: Text(AppStrings.letsGo),
         ),
