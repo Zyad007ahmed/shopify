@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shopify/core/network/dio_factory.dart';
 import 'package:shopify/core/storage/storage.dart';
@@ -17,3 +18,5 @@ final dioProvider = Provider<Dio>((ref) {
   final storage = ref.watch(storageProvider);
   return DioFactory.getDio(storage);
 });
+
+final pageProvider = StateProvider<int>((ref) => 0);

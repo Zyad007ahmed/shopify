@@ -4,3 +4,6 @@ const String signUpScreenRoute = "signup";
 const String entryPointScreenRoute = "entry_point";
 const String homeScreenRoute = "home";
 const String productDetailsScreenRoute = "product_details";
+const String categoryProductsScreenRoute = "category_products";
+const String editProfileScreenRoute = '/edit_profile';
+const String changePasswordScreenRoute = '/change_password';

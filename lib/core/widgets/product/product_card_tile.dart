@@ -7,8 +7,8 @@ import 'package:shopify/core/utils/extensions.dart';
 import 'package:shopify/core/widgets/network_image_with_loader.dart';
 import 'package:shopify/features/products/domain/entities/product.dart';
 
-class ProductCard extends StatelessWidget {
-  const ProductCard({
+class ProductCardTile extends StatelessWidget {
+  const ProductCardTile({
     super.key,
     required this.product,
     this.dicountpercent = 0,
@@ -23,11 +23,7 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return OutlinedButton(
       onPressed: () => onPress(context),
-      style: OutlinedButton.styleFrom(
-        minimumSize: const Size(140, 220),
-        maximumSize: const Size(140, 220),
-        padding: const EdgeInsets.all(8),
-      ),
+      style: OutlinedButton.styleFrom(padding: const EdgeInsets.all(8)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -85,7 +81,7 @@ class ProductCard extends StatelessWidget {
                   const SizedBox(height: defaultPadding / 2),
                   Text(
                     product.title,
-                    maxLines: 2,
+                    maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(
                       context,

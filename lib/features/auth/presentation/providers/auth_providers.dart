@@ -6,12 +6,15 @@ import 'package:shopify/features/auth/data/datasources/auth_remote_data_source.d
 import 'package:shopify/features/auth/data/repos/auth_repository_impl.dart';
 import 'package:shopify/features/auth/domain/entities/user.dart';
 import 'package:shopify/features/auth/domain/repos/auth_repository.dart';
+import 'package:shopify/features/auth/domain/usecases/change_password_usecase.dart';
 import 'package:shopify/features/auth/domain/usecases/check_auth_status_usecase.dart';
 import 'package:shopify/features/auth/domain/usecases/check_email_availability_usecase.dart';
 import 'package:shopify/features/auth/domain/usecases/get_user_profile_usecase.dart';
 import 'package:shopify/features/auth/domain/usecases/login_usecase.dart';
 import 'package:shopify/features/auth/domain/usecases/logout_usecase.dart';
 import 'package:shopify/features/auth/domain/usecases/signup_usecase.dart';
+import 'package:shopify/features/auth/domain/usecases/update_profile_usecase.dart';
+import 'package:shopify/features/auth/domain/usecases/upload_avatar_usecase.dart';
 import 'package:shopify/features/auth/presentation/viewmodels/auth_state.dart';
 import 'package:shopify/features/auth/presentation/viewmodels/auth_viewmodel.dart';
 
@@ -67,6 +70,21 @@ final checkEmailAvailabilityUsecaseProvider =
       final authRepository = ref.watch(authRepositoryProvider);
       return CheckEmailAvailabilityUsecase(authRepository);
     });
+
+final updateProfileUseCaseProvider = Provider<UpdateProfileUseCase>((ref) {
+  final repository = ref.watch(authRepositoryProvider);
+  return UpdateProfileUseCase(repository);
+});
+
+final uploadAvatarUseCaseProvider = Provider<UploadAvatarUseCase>((ref) {
+  final repository = ref.watch(authRepositoryProvider);
+  return UploadAvatarUseCase(repository);
+});
+
+final changePasswordUseCaseProvider = Provider<ChangePasswordUseCase>((ref) {
+  final repository = ref.watch(authRepositoryProvider);
+  return ChangePasswordUseCase(repository);
+});
 
 // VIEWMODEL PROVIDER
 final authViewModelProvider = StateNotifierProvider<AuthViewmodel, AuthState>((

@@ -17,10 +17,7 @@ class SignupDialog extends ConsumerWidget {
     return state.maybeWhen(
       loading: () => loadingDialog(),
       error: (message) => errorLoginDialog(message, context),
-      authenticated: (user) => signedupSuccessfully(context, user),
-      orElse: () {
-        return SizedBox.shrink();
-      },
+      orElse: () => SizedBox.shrink(),
     );
   }
 
@@ -33,7 +30,7 @@ class SignupDialog extends ConsumerWidget {
     );
   }
 
-  Widget errorLoginDialog(message, BuildContext context) {
+  Widget errorLoginDialog(String message, BuildContext context) {
     return AlertDialog(
       title: Text(
         AppStrings.loginFailed,
@@ -51,7 +48,7 @@ class SignupDialog extends ConsumerWidget {
     );
   }
 
-  navigateToEntryPoint(BuildContext context) {
+  void navigateToEntryPoint(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(
       context,
       entryPointScreenRoute,

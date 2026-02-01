@@ -13,4 +13,7 @@ class AppStrings {
 
   // search
   static const noSearchResults = 'No such a product with that name';
+
+  // category screen
+  static const noProductsInCategoryResults = 'No products in this category yet';
 }

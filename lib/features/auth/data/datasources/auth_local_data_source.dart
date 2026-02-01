@@ -30,13 +30,11 @@ class AuthLocalDataSourceImpl extends AuthLocalDataSource {
     return await storage.getRefreshToken();
   }
 
-  //todo
   @override
   Future<void> saveUserId(int userId) async {
     await storage.saveUserId(userId.toString());
   }
 
-  //todo
   @override
   Future<int?> getCachedUserId() async {
     final userId = await storage.getUserId();

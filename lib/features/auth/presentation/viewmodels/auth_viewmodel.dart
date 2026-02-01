@@ -104,4 +104,8 @@ class AuthViewmodel extends StateNotifier<AuthState> {
 
   bool get isAuthenticated =>
       state.maybeWhen(authenticated: (user) => true, orElse: () => false);
+
+  Future<void> refreshProfile() async {
+    await getUserProfile();
+  }
 }

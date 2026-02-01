@@ -5,6 +5,7 @@ import 'package:shopify/core/router/routes.dart';
 import 'package:shopify/core/theme/app_colors.dart';
 import 'package:shopify/core/utils/extensions.dart';
 import 'package:shopify/features/auth/presentation/providers/auth_providers.dart';
+import 'package:shopify/features/auth/presentation/viewmodels/auth_state.dart';
 import 'package:shopify/features/auth/presentation/widgets/sign_up_form.dart';
 import 'package:shopify/features/auth/presentation/widgets/signup_dialog.dart';
 
@@ -22,6 +23,8 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    listenForAuthenticationSuccess(context, ref);
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -121,6 +124,20 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
       builder: (context) {
         return SignupDialog();
       },
+    );
+  }
+
+  void listenForAuthenticationSuccess(BuildContext context, WidgetRef ref) {
+    ref.listen(authViewModelProvider, (_, state) {
+      state.whenOrNull(authenticated: (user) => navigateToEntryPoint(context));
+    });
+  }
+
+  void navigateToEntryPoint(BuildContext context) {
+    Navigator.pushNamedAndRemoveUntil(
+      context,
+      entryPointScreenRoute,
+      (Route<dynamic> route) => false,
     );
   }
 }

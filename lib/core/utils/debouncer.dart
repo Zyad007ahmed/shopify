@@ -10,7 +10,7 @@ class Debouncer {
 
   void call(VoidCallback callBack) {
     _timer?.cancel();
-    _timer = Timer(Duration(microseconds: milliseconds), callBack);
+    _timer = Timer(Duration(milliseconds: milliseconds), callBack);
   }
 
   void dispose() {

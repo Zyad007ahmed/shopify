@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
@@ -6,6 +8,7 @@ import 'package:shopify/features/auth/data/models/email_availablity_response_mod
 import 'package:shopify/features/auth/data/models/login_request_model.dart';
 import 'package:shopify/features/auth/data/models/sign_up_request_model.dart';
 import 'package:shopify/features/auth/data/models/token_model.dart';
+import 'package:shopify/features/auth/data/models/upload_file_response_model.dart';
 import 'package:shopify/features/auth/data/models/user_model.dart';
 
 part 'auth_remote_data_source.g.dart';
@@ -18,6 +21,8 @@ abstract class AuthRemoteDataSource {
     Map<String, dynamic> email,
   );
   Future<TokenModel> refreshToken(Map<String, dynamic> refreshToken);
+  Future<UserModel> updateUser(int id, Map<String, dynamic> data);
+  Future<UploadFileResponseModel> uploadFile(File file);
 }
 
 @RestApi(baseUrl: ApiConstants.baseUrl)
@@ -51,4 +56,18 @@ abstract class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
   @override
   @POST(ApiConstants.authRefreshEP)
   Future<TokenModel> refreshToken(@Body() Map<String, dynamic> refreshToken);
+
+  // Update user profile
+  @override
+  @PUT(ApiConstants.updateUserEP)
+  Future<UserModel> updateUser(
+    @Path('id') int id,
+    @Body() Map<String, dynamic> data,
+  );
+
+  // Upload file/image
+  @override
+  @POST(ApiConstants.uploadFileEP)
+  @MultiPart()
+  Future<UploadFileResponseModel> uploadFile(@Part(name: 'file') File file);
 }

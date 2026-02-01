@@ -4,6 +4,7 @@ import 'package:shopify/core/constants/ui_constants.dart';
 import 'package:shopify/core/router/routes.dart';
 import 'package:shopify/core/utils/extensions.dart';
 import 'package:shopify/features/auth/presentation/providers/auth_providers.dart';
+import 'package:shopify/features/auth/presentation/viewmodels/auth_state.dart';
 import 'package:shopify/features/auth/presentation/widgets/login_dialog.dart';
 import 'package:shopify/features/auth/presentation/widgets/login_form.dart';
 
@@ -14,6 +15,7 @@ class LoginScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    listenForAuthenticationSuccess(context, ref);
     final Size size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -90,6 +92,20 @@ class LoginScreen extends ConsumerWidget {
       builder: (context) {
         return LoginDialog();
       },
+    );
+  }
+
+  void listenForAuthenticationSuccess(BuildContext context, WidgetRef ref) {
+    ref.listen(authViewModelProvider, (_, state) {
+      state.whenOrNull(authenticated: (user) => navigateToEntryPoint(context));
+    });
+  }
+
+  void navigateToEntryPoint(BuildContext context) {
+    Navigator.pushNamedAndRemoveUntil(
+      context,
+      entryPointScreenRoute,
+      (Route<dynamic> route) => false,
     );
   }
 }

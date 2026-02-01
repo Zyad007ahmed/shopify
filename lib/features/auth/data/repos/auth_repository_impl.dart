@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:shopify/core/network/api_error_handler.dart';
 import 'package:shopify/core/network/api_result.dart';
 import 'package:shopify/features/auth/data/datasources/auth_local_data_source.dart';
@@ -94,6 +96,70 @@ class AuthRepositoryImpl extends AuthRepository {
       final isAvailable = response.isAvailable;
 
       return Success(isAvailable);
+    } catch (error) {
+      return Failure(ErrorHandler.handle(error));
+    }
+  }
+
+  @override
+  Future<ApiResult<User>> updateProfile({
+    String? name,
+    String? email,
+    String? avatar,
+  }) async {
+    try {
+      // Get current user ID from local storage
+      final userId = await localDataSource.getCachedUserId();
+      if (userId == null) {
+        return Failure(
+          ErrorHandler.handle(null, message: 'User not logged in'),
+        );
+      }
+
+      final data = <String, dynamic>{};
+      if (name != null) data['name'] = name;
+      if (email != null) data['email'] = email;
+      if (avatar != null) data['avatar'] = avatar;
+
+      // Update user
+      final userModel = await remoteDataSource.updateUser(userId, data);
+
+      // Save updated user
+      await localDataSource.saveUserId(userModel.id);
+
+      return Success(userModel.toEntity());
+    } catch (error) {
+      return Failure(ErrorHandler.handle(error));
+    }
+  }
+
+  @override
+  Future<ApiResult<String>> uploadAvatar(File imageFile) async {
+    try {
+      final imageUrl = (await remoteDataSource.uploadFile(imageFile)).location;
+      return Success(imageUrl);
+    } catch (error) {
+      return Failure(ErrorHandler.handle(error));
+    }
+  }
+
+  @override
+  Future<ApiResult<User>> changePassword(String newPassword) async {
+    try {
+      // Get current user ID
+      final userId = await localDataSource.getCachedUserId();
+      if (userId == null) {
+        return Failure(
+          ErrorHandler.handle(null, message: 'User not logged in'),
+        );
+      }
+
+      final data = <String, dynamic>{'password': newPassword};
+
+      // Update password
+      final userModel = await remoteDataSource.updateUser(userId, data);
+
+      return Success(userModel.toEntity());
     } catch (error) {
       return Failure(ErrorHandler.handle(error));
     }

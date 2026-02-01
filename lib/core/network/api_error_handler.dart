@@ -4,7 +4,7 @@ import 'package:shopify/core/error/exceptions.dart';
 import 'error_model.dart';
 
 class ErrorHandler {
-  static ErrorModel handle(dynamic error) {
+  static ErrorModel handle(dynamic error, {String? message}) {
     if (error is DioException) {
       switch (error.type) {
         case DioExceptionType.connectionError:
@@ -34,7 +34,7 @@ class ErrorHandler {
     } else if (error is CacheException) {
       return ErrorModel(message: error.message);
     } else {
-      return ErrorModel(message: "Unknown error occurred");
+      return ErrorModel(message: message ?? "Unknown error occurred");
     }
   }
 }
@@ -47,7 +47,7 @@ ErrorModel _handleError(dynamic data) {
   );
 }
 
-String? getMessageString(data) {
+String? getMessageString(dynamic data) {
   if (data['message'] is List) {
     return (data['message'] as List).join('\n');
   } else {

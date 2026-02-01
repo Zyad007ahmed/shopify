@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shopify/core/constants/ui_constants.dart';
 import 'package:shopify/core/router/routes.dart';
+import 'package:shopify/core/storage/first_launch_service.dart';
+import 'package:shopify/core/utils/extensions.dart';
 import 'package:shopify/core/widgets/dot_indicators.dart';
 
 import 'widgets/onbording_content.dart';
@@ -73,7 +75,7 @@ class _OnBordingScreenState extends State<OnBordingScreen> {
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     onPressed: () {
-                      Navigator.pushReplacementNamed(context, logInScreenRoute);
+                      navigateToLoginScreen(context);
                     },
                     child: Text(
                       "Skip",
@@ -123,10 +125,7 @@ class _OnBordingScreenState extends State<OnBordingScreen> {
                               duration: defaultDuration,
                             );
                           } else {
-                            Navigator.pushReplacementNamed(
-                              context,
-                              logInScreenRoute,
-                            );
+                            navigateToLoginScreen(context);
                           }
                         },
                         style: ElevatedButton.styleFrom(
@@ -150,6 +149,11 @@ class _OnBordingScreenState extends State<OnBordingScreen> {
         ),
       ),
     );
+  }
+
+  void navigateToLoginScreen(BuildContext context) async {
+    context.pushReplacementNamed(logInScreenRoute);
+    await FirstLaunchService.markOpened();
   }
 }
 

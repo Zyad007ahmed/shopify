@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shopify/core/constants/app_strings.dart';
-import 'package:shopify/core/router/routes.dart';
 import 'package:shopify/core/widgets/error_dialog.dart';
 import 'package:shopify/features/auth/presentation/providers/auth_providers.dart';
 import 'package:shopify/features/auth/presentation/viewmodels/auth_state.dart';
@@ -11,8 +10,6 @@ class LoginDialog extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    listenForAuthenticationSuccess(context, ref);
-
     final state = ref.watch(authViewModelProvider);
 
     return state.maybeWhen(
@@ -33,26 +30,7 @@ class LoginDialog extends ConsumerWidget {
     );
   }
 
-  Widget _errorLoginDialog(message, BuildContext context) {
+  Widget _errorLoginDialog(String message, BuildContext context) {
     return ErrorDialog(title: AppStrings.loginFailed, message: message);
-  }
-
-  navigateToEntryPoint(BuildContext context) {
-    Navigator.pushNamedAndRemoveUntil(
-      context,
-      entryPointScreenRoute,
-      (Route<dynamic> route) => false,
-    );
-  }
-
-  void listenForAuthenticationSuccess(BuildContext context, WidgetRef ref) {
-    ref.listen(authViewModelProvider, (_, state) {
-      state.maybeWhen(
-        authenticated: (user) {
-          navigateToEntryPoint(context);
-        },
-        orElse: () {},
-      );
-    });
   }
 }
