@@ -29,10 +29,8 @@ class Categories extends StatelessWidget {
               ...List.generate(
                 categories.length,
                 (index) => CategoryBtn(
-                  category: categories[index].name,
-                  image: categories[index].image,
+                  category: categories[index],
                   isActive: index == 0,
-                  press: () {}, //todo
                   isFirst: index == 0,
                   isLast: index == categories.length - 1,
                 ),
@@ -45,6 +43,6 @@ class Categories extends StatelessWidget {
   }
 
   void addAllcategoriesButton() {
-    categories.insert(0, Category(name: "All Categories"));
+    categories.insert(0, Category(id: 0, name: "All Categories"));
   }
 }

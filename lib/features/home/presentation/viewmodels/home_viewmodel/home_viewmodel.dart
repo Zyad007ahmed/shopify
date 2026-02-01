@@ -25,7 +25,7 @@ class HomeViewmodel extends StateNotifier<HomeState> {
       success: (categories) async {
         final futures = categories.map((category) {
           return getCategoryProductsUsecase(
-            category.id!,
+            category.id,
             limit: productsPerCategory,
           );
         }).toList();

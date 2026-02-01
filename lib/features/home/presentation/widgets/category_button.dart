@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:shopify/core/constants/ui_constants.dart';
+import 'package:shopify/core/router/routes.dart';
 import 'package:shopify/core/theme/app_colors.dart';
+import 'package:shopify/core/utils/extensions.dart';
+import 'package:shopify/features/products/domain/entities/category.dart';
 
 class CategoryBtn extends StatelessWidget {
   const CategoryBtn({
     super.key,
     required this.category,
-    this.image,
     required this.isActive,
-    required this.press,
     required this.isFirst,
     required this.isLast,
   });
 
-  final String category;
-  final String? image;
+  final Category category;
   final bool isActive;
-  final VoidCallback press;
   final bool isFirst;
   final bool isLast;
 
@@ -28,7 +27,7 @@ class CategoryBtn extends StatelessWidget {
         right: isLast ? defaultPadding : 0,
       ),
       child: InkWell(
-        onTap: press,
+        onTap: () => onPress(context),
         borderRadius: const BorderRadius.all(Radius.circular(30)),
         child: Container(
           height: 36,
@@ -44,7 +43,7 @@ class CategoryBtn extends StatelessWidget {
           ),
           alignment: Alignment.center,
           child: Text(
-            category,
+            category.name,
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w500,
@@ -56,5 +55,11 @@ class CategoryBtn extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void onPress(BuildContext context) {
+    if (category.id != 0) {
+      context.pushNamed(categoryProductsScreenRoute, arguments: category);
+    }
   }
 }

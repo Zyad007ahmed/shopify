@@ -22,8 +22,6 @@ class MostPopular extends StatelessWidget {
             style: Theme.of(context).textTheme.titleSmall,
           ),
         ),
-        // While loading use 👇
-        // SeconderyProductsSkelton(),
         SizedBox(
           height: 114,
           child: ListView.builder(
@@ -45,7 +43,7 @@ class MostPopular extends StatelessWidget {
                 ),
                 child: SecondaryProductCard(
                   image: demoPopularProducts[index].images[0],
-                  brandName: brandName,
+                  brandName: demoBrandName,
                   title: demoPopularProducts[index].title,
                   price: demoPopularProducts[index].price,
                   priceAfetDiscount: priceAfetrDiscount,
@@ -54,7 +52,7 @@ class MostPopular extends StatelessWidget {
                     Navigator.pushNamed(
                       context,
                       productDetailsScreenRoute,
-                      arguments: index.isEven,
+                      arguments: demoPopularProducts[index],
                     );
                   },
                 ),

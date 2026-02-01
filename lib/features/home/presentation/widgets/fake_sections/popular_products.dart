@@ -21,8 +21,6 @@ class PopularProducts extends StatelessWidget {
             style: Theme.of(context).textTheme.titleSmall,
           ),
         ),
-        // While loading use 👇
-        // const ProductsSkelton(),
         SizedBox(
           height: 220,
           child: ListView.builder(

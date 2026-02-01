@@ -34,7 +34,7 @@ class LoadingHomeSkelton extends StatelessWidget {
                 loadingCategoryBtn(isFirst: true, isLast: false),
                 loadingCategoryBtn(isFirst: false, isLast: false),
                 loadingCategoryBtn(isFirst: false, isLast: false),
-                loadingCategoryBtn(isFirst: true, isLast: true),
+                loadingCategoryBtn(isFirst: false, isLast: true),
               ],
             ),
           ),
@@ -101,7 +101,7 @@ class LoadingHomeSkelton extends StatelessWidget {
       baseColor: AppColors.greyColor,
       highlightColor: Colors.white,
       child: Container(
-        padding: EdgeInsets.only(
+        margin: EdgeInsets.only(
           left: isFirst ? defaultPadding : defaultPadding / 2,
           right: isLast ? defaultPadding : 0,
         ),
