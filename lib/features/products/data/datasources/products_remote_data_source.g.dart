@@ -50,7 +50,7 @@ class _ProductsRemoteDataSource implements ProductsRemoteDataSource {
           .map((dynamic i) => ProductModel.fromJson(i as Map<String, dynamic>))
           .toList();
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options, _result);
+      errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
     }
     return _value;
@@ -77,7 +77,7 @@ class _ProductsRemoteDataSource implements ProductsRemoteDataSource {
     try {
       _value = ProductModel.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options, _result);
+      errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
     }
     return _value;
@@ -114,7 +114,7 @@ class _ProductsRemoteDataSource implements ProductsRemoteDataSource {
           .map((dynamic i) => ProductModel.fromJson(i as Map<String, dynamic>))
           .toList();
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options, _result);
+      errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
     }
     return _value;
@@ -151,7 +151,7 @@ class _ProductsRemoteDataSource implements ProductsRemoteDataSource {
           .map((dynamic i) => ProductModel.fromJson(i as Map<String, dynamic>))
           .toList();
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options, _result);
+      errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
     }
     return _value;
@@ -180,7 +180,7 @@ class _ProductsRemoteDataSource implements ProductsRemoteDataSource {
           .map((dynamic i) => CategoryModel.fromJson(i as Map<String, dynamic>))
           .toList();
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options, _result);
+      errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
     }
     return _value;
@@ -207,7 +207,7 @@ class _ProductsRemoteDataSource implements ProductsRemoteDataSource {
     try {
       _value = CategoryModel.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options, _result);
+      errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
     }
     return _value;
@@ -230,7 +230,7 @@ class _ProductsRemoteDataSource implements ProductsRemoteDataSource {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/products/id/related',
+            '/products/${id}/related',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -243,7 +243,7 @@ class _ProductsRemoteDataSource implements ProductsRemoteDataSource {
           .map((dynamic i) => ProductModel.fromJson(i as Map<String, dynamic>))
           .toList();
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options, _result);
+      errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
     }
     return _value;
